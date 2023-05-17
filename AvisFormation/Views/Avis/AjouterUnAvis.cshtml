@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "AjouterUnAvis";
+}
+@model Avis
+<h1>AjouterUnAvis</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <form asp-action="AjouterUnAvis" method="post">
+                <div class="mb-3">
+                    <label for="Nom" class="form-label">Nom</label>
+                    <input type="text" name="Nom" class="form-control" id="Nom" placeholder="Vôtre nom">
+                </div>
+                <div class="mb-3">
+                    <label for="Note" class="form-label">Note</label>
+                    <select name="Note" class="form-control form-control-sm">
+                        <option selected>Selectionner une note</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="Description" class="form-label">Vôtre avis</label>
+                    <textarea name="Description" class="form-control" id="Description" rows="3"></textarea>
+                </div>
+                <input type="hidden" value="@Model.FormationId" name="FormationId" />
+                <input type="submit" class="btn btn-primary" value="Ajouter" name="submit" />
+            </form>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,56 @@
+﻿@model DetailsFormationViewModel
+@{
+    ViewData["Title"] = Model.Nom;
+}
+
+
+<div class="card mb-3">
+    <div class="card-header py-3">
+        <h3>Details de la formation</h3>
+    </div>
+    <div class="card-body py-3">
+        <h5 class="card-title">@Model.Nom</h5>
+        <p class="card-text">@Model.Description</p>
+        <p class="card-text">La note: @Model.note</p>
+        <p class="card-text">Le nombre des avis: @Model.NombreAvis</p>
+
+        <a href="@Model.Url" class="btn btn-outline-primary">Lien vers la formation</a>
+        <a asp-action="AjouterUnAvis" asp-controller="Avis" asp-route-nomSeo="@Model.NomSeo" class="btn btn-primary">Ajouter un avis</a>
+    </div>
+</div>
+<h4>
+    Avis sur la formation
+</h4>
+@foreach (var a in Model.Avis)
+{
+    <div class="card my-3">
+        <div class="card-header">
+            <h5>@a.Nom</h5>
+        </div>
+        <div class="card-body">
+            <p class="card-text">@a.Description</p>
+            @{
+                var i = 0;
+                var n = Convert.ToInt32(a.Note);
+                double s;
+            }
+            @for (i = 0; i < n; i++)
+            {
+                <i class="fa-solid fa-star" style="color:orange"></i>
+            }
+            @if (a.Note - i != 0)
+            {
+                <i class="fa-regular fa-star-half-stroke" style="color:orange"></i>
+                s = 5 - a.Note - 1;
+            }
+            else
+            {
+                s = 5 - a.Note;
+            }
+            @for (i = 0; i < s; i++)
+            {
+                <i class="fa-regular fa-star" style="color:orange"></i>
+            }
+        </div>
+    </div>
+}

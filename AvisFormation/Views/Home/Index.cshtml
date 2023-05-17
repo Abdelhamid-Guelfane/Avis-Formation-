@@ -1,0 +1,61 @@
+﻿@model List<DetailsFormationViewModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container">
+    <div class="p-2 mb-4 bg-dark rounded-3">
+        <div class="container-fluid py-2 text-white">
+            <h1 class="display-5 fw-bold">Courses Reviews</h1>
+            <p class="col-md-12 fs-5">
+                This website is an online platform that showcases a variety of courses. It allows users to browse through different subjects and choose courses that align with their interests. Additionally, users can leave reviews and ratings of courses they have taken, helping others make informed decisions. The website's clean and intuitive design makes it easy for users to navigate and enroll in courses.
+            </p>
+            <button class="btn btn-primary btn-lg" type="button">Donate</button>
+        </div>
+    </div>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3 mb-3 mb-sm-0">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Nom</h5>
+                        <p class="card-text truncate">@item.Description</p>
+                        <p class="card-text">
+                            @if (item.note == 0)
+                            {
+                                <span>Formation non évaluée</span>
+                            }
+                            else
+                            {
+                                var i = 0;
+                                var n = Convert.ToInt32(item.note);
+                                double s;
+                                @for (i = 0; i < n; i++)
+                                {
+                                    <i class="fa-solid fa-star" style="color:orange"></i>
+                                }
+                                @if (item.note - i != 0)
+                                {
+                                    <i class="fa-regular fa-star-half-stroke" style="color:orange"></i>
+                                    s = 5 - item.note - 1;
+                                }
+                                else
+                                {
+                                    s = 5 - item.note;
+                                }
+                                @for (i = 0; i < s; i++)
+                                {
+                                    <i class="fa-regular fa-star" style="color:orange"></i>
+                                }
+                                @item.NombreAvis
+                            }
+                        </p>
+                        <a asp-action="Details" asp-controller="Formation" asp-route-nomSeo="@item.NomSeo" class="btn btn-primary">Détails</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
